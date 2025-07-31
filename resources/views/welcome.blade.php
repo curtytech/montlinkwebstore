@@ -21,7 +21,11 @@
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card product-card h-100">
                         @if($produto->imagem)
-                            <img src="{{ asset('storage/' . $produto->imagem) }}" class="card-img-top product-img" alt="{{ $produto->nome }}">
+                            @if(str_starts_with($produto->imagem, 'http'))
+                                <img src="{{ $produto->imagem }}" class="card-img-top product-img" alt="{{ $produto->nome }}" referrerpolicy="no-referrer">
+                            @else
+                                <img src="{{ asset('storage/' . $produto->imagem) }}" class="card-img-top product-img" alt="{{ $produto->nome }}">
+                            @endif
                         @else
                             <img src="https://via.placeholder.com/300x200?text=Sem+Imagem" class="card-img-top product-img" alt="{{ $produto->nome }}">
                         @endif

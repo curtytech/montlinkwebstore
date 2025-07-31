@@ -29,7 +29,11 @@
         <div class="row">
             <div class="col-md-6 mb-4">
                 @if($produto->imagem)
-                    <img src="{{ asset('storage/' . $produto->imagem) }}" class="img-fluid product-image" alt="{{ $produto->nome }}">
+                    @if(str_starts_with($produto->imagem, 'http'))
+                        <img src="{{ $produto->imagem }}" class="img-fluid product-image" alt="{{ $produto->nome }}" referrerpolicy="no-referrer">
+                    @else
+                        <img src="{{ asset('storage/' . $produto->imagem) }}" class="img-fluid product-image" alt="{{ $produto->nome }}">
+                    @endif
                 @else
                     <img src="https://via.placeholder.com/400x400?text=Sem+Imagem" class="img-fluid product-image" alt="{{ $produto->nome }}">
                 @endif
